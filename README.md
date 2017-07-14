@@ -96,9 +96,9 @@ How to run this application :
 
 1. Clone code from repository ( You can change Google API Key as per requirement in application.properties)
 2. Open command prompt in admin mode
-3. cd {..}\MyShop
+3. cd {..}\retail-manager
 4. Run following commands
-	a. gradlew cleanEclipse clean eclipse clean build
-	b. gradlew bootrun --debug(As per required Logging level)
+	i. gradlew cleanEclipse clean eclipse clean build
+	ii. gradlew bootrun --debug(As per required Logging level)
 5. Import SampleRequests.json in ReST Client add on of Firefox ( You can use chrome with Postman plugin )
 6. Hit all 3 Add shop requests and cross verify by hitting Retrieve Nearest shop request
