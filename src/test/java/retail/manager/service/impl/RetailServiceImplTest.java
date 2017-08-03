@@ -5,6 +5,9 @@ package retail.manager.service.impl;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +15,7 @@ import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import retail.manager.beans.ShopAddressBean;
+import retail.manager.beans.ShopDetailsBean;
 import retail.manager.beans.ShopRequestBean;
 import retail.manager.dto.AddressDetails;
 import retail.manager.properties.GlobalProperties;
@@ -39,6 +43,7 @@ public class RetailServiceImplTest {
 
 	@After
 	public void tearDown() throws Exception {
+		service = null;
 	}
 
 	/**
@@ -56,13 +61,47 @@ public class RetailServiceImplTest {
 	@Test
 	public void testAddShop() {
 		ShopRequestBean req = new ShopRequestBean();
-		req.setName("ABC");
+		req.setName("McD");
 		ShopAddressBean shopAddressBean = new ShopAddressBean();
 		shopAddressBean.setAddressLine("Wardha");
-		shopAddressBean.setNumber("333");
+		shopAddressBean.setNumber("999");
 		shopAddressBean.setPostcode("442001");
 		req.setShopAddress(shopAddressBean);
 		assertNotNull(service.addShop(req));
 	}
-
+	
+	/**
+	 * Test method for NearestLocation
+	 */
+	@Test
+	public void testNearestLocation() {
+		AddressDetails add = new AddressDetails();
+		add.setLatitude("20.719194");
+		add.setLongitude("78.315712");
+		List<ShopDetailsBean> shopList = new ArrayList<ShopDetailsBean>();
+		ShopDetailsBean bean = new ShopDetailsBean();
+		bean.setLatitude("20.719194");
+		bean.setLongitude("78.315712");
+		bean.setShopAddress("Add");
+		bean.setShopName("ABC");
+		bean.setShopPostCode("442001");
+		shopList.add(bean);
+		assertNotNull(service.getNearestLocation(add, shopList));
+	}
+	
+	/**
+	 * Test method for NearestShop
+	 */
+	@Test
+	public void testNearestShop() {
+		assertNotNull(service.getNearestShop("20.719194", "78.315712"));
+	}
+	
+	/**
+	 * Test method for LatLongPositions
+	 */
+	@Test
+	public void testLatLongPositions() {
+		assertNotNull(service.getLatLongPositions("442001"));
+	}
 }

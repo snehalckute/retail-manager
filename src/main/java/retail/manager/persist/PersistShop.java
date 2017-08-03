@@ -34,8 +34,10 @@ public class PersistShop {
 	 * Static Block to initialize cache
 	 */
 	static {
-		cm.addCache(RetailConstants.CACHE_NAME);
-		logger.info("Cache - retailCache has been initialized");
+		if (!cm.cacheExists(RetailConstants.CACHE_NAME)) {
+			cm.addCache(RetailConstants.CACHE_NAME);
+			logger.info("Cache - retailCache has been initialized");
+		}
 	}
 
 	private PersistShop() {
